@@ -1,0 +1,163 @@
+object frmAbastecimento: TfrmAbastecimento
+  Left = 469
+  Top = 234
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Abastecimento'
+  ClientHeight = 212
+  ClientWidth = 281
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object tanque: TLabel
+    Left = 23
+    Top = 88
+    Width = 33
+    Height = 13
+    Caption = 'Bomba'
+  end
+  object Bomba: TLabel
+    Left = 24
+    Top = 38
+    Width = 37
+    Height = 13
+    Caption = 'Tanque'
+  end
+  object Label3: TLabel
+    Left = 24
+    Top = 128
+    Width = 79
+    Height = 13
+    Caption = 'Valor abastecido'
+  end
+  object spBtnTanques: TSpeedButton
+    Left = 240
+    Top = 32
+    Width = 23
+    Height = 21
+    Caption = 'T'
+    OnClick = spBtnTanquesClick
+  end
+  object spBtnBombas: TSpeedButton
+    Left = 240
+    Top = 80
+    Width = 23
+    Height = 21
+    Caption = 'B'
+    OnClick = spBtnBombasClick
+  end
+  object btnConfirmar: TButton
+    Left = 111
+    Top = 155
+    Width = 56
+    Height = 25
+    Caption = 'Confirmar'
+    TabOrder = 3
+    OnClick = btnConfirmarClick
+  end
+  object cbTanque: TComboBox
+    Left = 110
+    Top = 32
+    Width = 121
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 0
+  end
+  object edtValor: TEdit
+    Left = 111
+    Top = 124
+    Width = 121
+    Height = 21
+    TabOrder = 2
+  end
+  object cbBomba: TComboBox
+    Left = 111
+    Top = 80
+    Width = 119
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 1
+  end
+  object btnCancelar: TButton
+    Left = 176
+    Top = 155
+    Width = 56
+    Height = 25
+    Caption = 'Cancelar'
+    TabOrder = 4
+    OnClick = btnCancelarClick
+  end
+  object sqlQryBomba: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'idTanque'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT DISTINCT ID_BOMBA '
+      'FROM BOMBA B'
+      'INNER JOIN ABASTECIMENTO AB'
+      'ON B.ID = AB.ID_BOMBA'
+      'WHERE AB.ID_TANQUE = :idTanque')
+    SQLConnection = dmPrincipal.sqlConn
+    Left = 8
+    Top = 176
+    object sqlQryBombaID_BOMBA: TIntegerField
+      FieldName = 'ID_BOMBA'
+      Required = True
+    end
+  end
+  object sqlQryTanque: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select id from tanque;')
+    SQLConnection = dmPrincipal.sqlConn
+    Left = 40
+    Top = 176
+    object sqlQryTanqueID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+  end
+  object sqlDsAbastecimento: TSQLDataSet
+    CommandText = 
+      'INSERT INTO ABASTECIMENTO (ID_TANQUE, ID_BOMBA, VALOR_ABASTECIDO' +
+      ', DIA)'#13#10'                                       VALUES (:ID_TANQU' +
+      'E,:ID_BOMBA,:VALOR_ABASTECIDO, :DIA);'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_TANQUE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_BOMBA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'VALOR_ABASTECIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DIA'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmPrincipal.sqlConn
+    Left = 72
+    Top = 177
+  end
+end
