@@ -24,11 +24,13 @@ type
     spBtnTanques: TSpeedButton;
     spBtnBombas: TSpeedButton;
     sqlQryBombaID_BOMBA: TIntegerField;
+    sqlQryTanqueVALOR_DO_LITRO: TFloatField;
     procedure btnConfirmarClick(Sender: TObject);
     procedure limpaCampos();
     procedure btnCancelarClick(Sender: TObject);
     procedure spBtnTanquesClick(Sender: TObject);
     procedure spBtnBombasClick(Sender: TObject);
+    procedure cbTanqueChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,17 +47,19 @@ implementation
 
 procedure TfrmAbastecimento.btnConfirmarClick(Sender: TObject);
 var
-  valorAbastecido: Double;
+  litros, valorAbastecido: Double;
   tanque, bomba: Integer;
 const
   ID_DA_TRANSACAO = 1;
+  VALOR_MINIMO = 1;
+  TAXA = 0.13;
 begin
   // insere os valores no banco e confirma
   valorAbastecido := StrToFloatDef(edtValor.Text, 0);
   tanque := StrToIntDef(cbTanque.Items[cbTanque.ItemIndex], 0);
   bomba := StrToIntDef(cbBomba.Items[cbBomba.ItemIndex], 0);
 
-  if (tanque >= 1) and (bomba >= 1) and (valorAbastecido <> 0)then
+  if (tanque >= VALOR_MINIMO) and (bomba >= VALOR_MINIMO) and (valorAbastecido <> 0) then
   begin
     try
       Transacao.TransactionID := ID_DA_TRANSACAO;
@@ -65,7 +69,24 @@ begin
       sqlDsAbastecimento.ParamByName('ID_TANQUE').AsInteger := tanque;
       sqlDsAbastecimento.ParamByName('ID_BOMBA').AsInteger := bomba;
       sqlDsAbastecimento.ParamByName('VALOR_ABASTECIDO').AsFloat := valorAbastecido;
+      sqlDsAbastecimento.ParamByName('IMPOSTO').AsFloat := valorAbastecido * TAXA;
       sqlDsAbastecimento.ParamByName('DIA').AsString := FormatDateTime('dd.mm.yyyy', now);
+      try
+        sqlQryTanque.Open;
+        sqlQryTanque.First;
+        while (sqlQryTanqueID.AsInteger <> 0) do
+        begin
+          if (sqlQryTanqueID.AsInteger = tanque) then
+          begin
+            litros := valorAbastecido / sqlQryTanqueVALOR_DO_LITRO.AsFloat;
+            sqlDsAbastecimento.ParamByName('LITROS').AsFloat := litros;
+            break;
+          end;
+          sqlQryTanque.Next;
+        end;
+      finally
+        sqlQryTanque.Close;
+      end;
       sqlDsAbastecimento.ExecSQL;
       dmPrincipal.sqlConn.Commit(Transacao);
       ShowMessage('Abastecimento realizado com sucesso!.');
@@ -143,6 +164,11 @@ begin
   finally
     sqlQryBomba.Close;
   end;
+end;
+
+procedure TfrmAbastecimento.cbTanqueChange(Sender: TObject);
+begin
+  cbBomba.Clear;
 end;
 
 end.

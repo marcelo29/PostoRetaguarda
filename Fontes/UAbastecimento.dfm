@@ -69,6 +69,7 @@ object frmAbastecimento: TfrmAbastecimento
     Height = 21
     ItemHeight = 13
     TabOrder = 0
+    OnChange = cbTanqueChange
   end
   object edtValor: TEdit
     Left = 111
@@ -103,11 +104,8 @@ object frmAbastecimento: TfrmAbastecimento
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT DISTINCT ID_BOMBA '
-      'FROM BOMBA B'
-      'INNER JOIN ABASTECIMENTO AB'
-      'ON B.ID = AB.ID_BOMBA'
-      'WHERE AB.ID_TANQUE = :idTanque')
+      'SELECT ID_BOMBA FROM TANQUE_BOMBA'
+      'WHERE ID_TANQUE = :idTanque')
     SQLConnection = dmPrincipal.sqlConn
     Left = 8
     Top = 176
@@ -120,7 +118,7 @@ object frmAbastecimento: TfrmAbastecimento
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'select id from tanque;')
+      'select id, valor_do_litro from tanque;')
     SQLConnection = dmPrincipal.sqlConn
     Left = 40
     Top = 176
@@ -128,12 +126,15 @@ object frmAbastecimento: TfrmAbastecimento
       FieldName = 'ID'
       Required = True
     end
+    object sqlQryTanqueVALOR_DO_LITRO: TFloatField
+      FieldName = 'VALOR_DO_LITRO'
+    end
   end
   object sqlDsAbastecimento: TSQLDataSet
     CommandText = 
       'INSERT INTO ABASTECIMENTO (ID_TANQUE, ID_BOMBA, VALOR_ABASTECIDO' +
-      ', DIA)'#13#10'                                       VALUES (:ID_TANQU' +
-      'E,:ID_BOMBA,:VALOR_ABASTECIDO, :DIA);'#13#10
+      ', DIA, IMPOSTO, LITROS) VALUES (:ID_TANQUE,:ID_BOMBA,:VALOR_ABAS' +
+      'TECIDO, :DIA, :IMPOSTO, :LITROS);'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -154,6 +155,16 @@ object frmAbastecimento: TfrmAbastecimento
       item
         DataType = ftUnknown
         Name = 'DIA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IMPOSTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'LITROS'
         ParamType = ptInput
       end>
     SQLConnection = dmPrincipal.sqlConn
