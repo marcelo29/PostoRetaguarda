@@ -34,7 +34,12 @@ uses DateUtils, URelatorioPorPeriodo, RLConsts;
 
 procedure TfrmMenuPrincipal.Abastecer1Click(Sender: TObject);
 begin
+<<<<<<< HEAD
+  if (frmAbastecimento = nil) then
+    frmAbastecimento := TfrmAbastecimento.Create(Self);
+=======
   frmAbastecimento := TfrmAbastecimento.Create(Self);
+>>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a
   try
     frmAbastecimento.ShowModal;
   finally

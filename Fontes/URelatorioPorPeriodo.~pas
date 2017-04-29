@@ -56,22 +56,31 @@ begin
     frmRelatorio := TfrmRelatorio.Create(self);
   try
     try
-    dataInicio := FormatDateTime('dd.mm.yyyy', dtpInicio.Date);
-    dataFim := FormatDateTime('dd.mm.yyyy', dtpFim.Date);
+      dataInicio := FormatDateTime('dd.mm.yyyy', dtpInicio.Date);
+      dataFim := FormatDateTime('dd.mm.yyyy', dtpFim.Date);
 
-    sqlQryRelatorio.ParamByName('DATA_INICIO').Value := dataInicio;
-    sqlQryRelatorio.ParamByName('DATA_FIM').Value := dataFim;
+      sqlQryRelatorio.ParamByName('DATA_INICIO').Value := dataInicio;
+      sqlQryRelatorio.ParamByName('DATA_FIM').Value := dataFim;
 
+      cdsRelatorio.Open;
+
+      sqlQryValorTotal.ParamByName('DATA_INICIO').AsString := dataInicio;
+      sqlQryValorTotal.ParamByName('DATA_FIM').AsString := dataFim;
+      sqlQryValorTotal.Open;
+
+      frmRelatorio.RLReport1.Preview();
+    except
+      ShowMessage('Erro ao exibir relatório');
+    end;
 =======
   frmRelatorio := TfrmRelatorio.Create(self);
   try
     dataInicio := FormatDateTime('dd.mm.yyyy', dtpInicio.Date);
     dataFim := FormatDateTime('dd.mm.yyyy', dtpFim.Date);
 
-    sqlQryRelatorio.Params[0].Value := dataInicio;
-    sqlQryRelatorio.Params[1].Value := dataFim;
-    //sqlQryRelatorio.Open;
->>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a
+    sqlQryRelatorio.ParamByName('DATA_INICIO').Value := dataInicio;
+    sqlQryRelatorio.ParamByName('DATA_FIM').Value := dataFim;
+
     cdsRelatorio.Open;
 
     sqlQryValorTotal.ParamByName('DATA_INICIO').AsString := dataInicio;
@@ -79,11 +88,6 @@ begin
     sqlQryValorTotal.Open;
 
     frmRelatorio.RLReport1.Preview();
-<<<<<<< HEAD
-    except
-      ShowMessage('Erro ao exibir relatório');
-    end;
-=======
 >>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a
   finally
     sqlQryRelatorio.Close;
@@ -99,4 +103,7 @@ begin
 end;
 
 end.
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a

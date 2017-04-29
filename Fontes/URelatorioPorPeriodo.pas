@@ -30,7 +30,6 @@ type
     cdsRelatorioBOMBA: TIntegerField;
     cdsRelatorioVALOR_DIARIO: TFloatField;
     procedure spdBtnPesquisarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +50,6 @@ var
   dataInicio, dataFim: string;
 begin
   // mostra os dados no relatorio
-<<<<<<< HEAD
   if (frmRelatorio = nil) then
     frmRelatorio := TfrmRelatorio.Create(self);
   try
@@ -72,23 +70,7 @@ begin
     except
       ShowMessage('Erro ao exibir relatório');
     end;
-=======
-  frmRelatorio := TfrmRelatorio.Create(self);
-  try
-    dataInicio := FormatDateTime('dd.mm.yyyy', dtpInicio.Date);
-    dataFim := FormatDateTime('dd.mm.yyyy', dtpFim.Date);
 
-    sqlQryRelatorio.ParamByName('DATA_INICIO').Value := dataInicio;
-    sqlQryRelatorio.ParamByName('DATA_FIM').Value := dataFim;
-
-    cdsRelatorio.Open;
-
-    sqlQryValorTotal.ParamByName('DATA_INICIO').AsString := dataInicio;
-    sqlQryValorTotal.ParamByName('DATA_FIM').AsString := dataFim;
-    sqlQryValorTotal.Open;
-
-    frmRelatorio.RLReport1.Preview();
->>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a
   finally
     sqlQryRelatorio.Close;
     cdsRelatorio.Close;
@@ -97,13 +79,5 @@ begin
   end;
 end;
 
-procedure TfrmRelatorioPeriodo.FormCreate(Sender: TObject);
-begin
-  RLConsts.SetVersion(3, 72, 'B');
-end;
-
 end.
-<<<<<<< HEAD
-=======
 
->>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a

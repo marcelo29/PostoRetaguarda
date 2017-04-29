@@ -83,7 +83,6 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
     MaxBlobSize = -1
     Params = <
       item
-<<<<<<< HEAD
         DataType = ftUnknown
         Name = 'DATA_INICIO'
         ParamType = ptUnknown
@@ -92,16 +91,6 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
         DataType = ftUnknown
         Name = 'DATA_FIM'
         ParamType = ptUnknown
-=======
-        DataType = ftString
-        Name = 'P1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftString
-        Name = 'P2'
-        ParamType = ptInput
->>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a
       end>
     SQL.Strings = (
       
@@ -112,11 +101,7 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
       'ON B.ID = AB.ID_BOMBA'
       'INNER JOIN TANQUE T'
       'ON T.ID = AB.ID_TANQUE'
-<<<<<<< HEAD
       'WHERE AB.DIA BETWEEN :DATA_INICIO AND :DATA_FIM'
-=======
-      'WHERE AB.DIA BETWEEN :P1 AND :P2'
->>>>>>> 0dce214d261d9b75fc2e9581956d196c78fa662a
       'GROUP BY AB.DIA, T.ID, B.ID'
       'ORDER BY AB.DIA, T.ID')
     SQLConnection = dmPrincipal.sqlConn
