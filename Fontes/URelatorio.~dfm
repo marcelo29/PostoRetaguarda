@@ -141,6 +141,7 @@ object frmRelatorio: TfrmRelatorio
       Top = 70
       Width = 718
       Height = 16
+      BandType = btFooter
       Color = clSilver
       ParentColor = False
       Transparent = False

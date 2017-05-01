@@ -30,6 +30,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure spBtnTanquesClick(Sender: TObject);
     procedure spBtnBombasClick(Sender: TObject);
+    procedure cbTanqueChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -163,6 +164,11 @@ begin
   finally
     sqlQryBomba.Close;
   end;
+end;
+
+procedure TfrmAbastecimento.cbTanqueChange(Sender: TObject);
+begin
+  cbBomba.Clear;
 end;
 
 end.

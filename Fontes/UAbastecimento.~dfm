@@ -69,6 +69,7 @@ object frmAbastecimento: TfrmAbastecimento
     Height = 21
     ItemHeight = 13
     TabOrder = 0
+    OnChange = cbTanqueChange
   end
   object edtValor: TEdit
     Left = 111

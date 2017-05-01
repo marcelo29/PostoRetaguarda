@@ -25,6 +25,9 @@ object frmMenuPrincipal: TfrmMenuPrincipal
       Caption = 'Abastecer'
       OnClick = Abastecer1Click
     end
+    object Controle1: TMenuItem
+      Caption = 'Controle'
+    end
     object Relatorio1: TMenuItem
       Caption = 'Relat'#243'rio'
       OnClick = Relatorio1Click

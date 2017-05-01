@@ -59,8 +59,8 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
     Top = 16
     Width = 186
     Height = 21
-    Date = 42829.000000000000000000
-    Time = 42829.000000000000000000
+    Date = 42853.000000000000000000
+    Time = 42853.000000000000000000
     TabOrder = 0
   end
   object dtpFim: TDateTimePicker
@@ -68,8 +68,8 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
     Top = 48
     Width = 186
     Height = 21
-    Date = 42832.000000000000000000
-    Time = 42832.000000000000000000
+    Date = 42862.000000000000000000
+    Time = 42862.000000000000000000
     TabOrder = 1
   end
   object dsRelatorio: TDataSource
@@ -92,16 +92,14 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
         ParamType = ptUnknown
       end>
     SQL.Strings = (
-      
-        'SELECT AB.DIA, T.ID AS TANQUE, B.ID AS BOMBA, SUM(AB.VALOR_ABAST' +
-        'ECIDO) AS VALOR_DIARIO'
+      'SELECT AB.DIA, T.ID AS TANQUE, B.ID AS BOMBA,'
+      'AB.VALOR_ABASTECIDO AS VALOR_DIARIO'
       'FROM BOMBA B'
       'INNER JOIN ABASTECIMENTO AB'
       'ON B.ID = AB.ID_BOMBA'
       'INNER JOIN TANQUE T'
       'ON T.ID = AB.ID_TANQUE'
       'WHERE AB.DIA BETWEEN :DATA_INICIO AND :DATA_FIM'
-      'GROUP BY AB.DIA, T.ID, B.ID'
       'ORDER BY AB.DIA, T.ID')
     SQLConnection = dmPrincipal.sqlConn
     Left = 102

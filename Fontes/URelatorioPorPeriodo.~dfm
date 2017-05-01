@@ -15,7 +15,6 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lblInicio: TLabel
@@ -60,8 +59,8 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
     Top = 16
     Width = 186
     Height = 21
-    Date = 42829.000000000000000000
-    Time = 42829.000000000000000000
+    Date = 42853.000000000000000000
+    Time = 42853.000000000000000000
     TabOrder = 0
   end
   object dtpFim: TDateTimePicker
@@ -69,8 +68,8 @@ object frmRelatorioPeriodo: TfrmRelatorioPeriodo
     Top = 48
     Width = 186
     Height = 21
-    Date = 42832.000000000000000000
-    Time = 42832.000000000000000000
+    Date = 42862.000000000000000000
+    Time = 42862.000000000000000000
     TabOrder = 1
   end
   object dsRelatorio: TDataSource
